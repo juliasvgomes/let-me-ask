@@ -1,18 +1,18 @@
-import { ArrowRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { useRooms } from '@/http/use-rooms'
-import { dayjs } from '@/lib/dayjs'
-import { Badge } from './ui/badge'
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useRooms } from "@/http/use-rooms";
+import { dayjs } from "@/lib/dayjs";
+import { Badge } from "./ui/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from './ui/card'
+} from "./ui/card";
 
 export function RoomList() {
-  const { data, isLoading } = useRooms()
+  const { data, isLoading } = useRooms();
 
   return (
     <Card>
@@ -30,14 +30,14 @@ export function RoomList() {
         {data?.map((room) => {
           return (
             <Link
-              className="flex items-center justify-between rounded-lg border p-3 hover:bg-accent/50"
+              className="relative flex flex-col gap-1 rounded-lg border p-3 hover:bg-accent/50"
               key={room.id}
               to={`/room/${room.id}`}
             >
               <div className="flex flex-1 flex-col gap-1">
                 <h3 className="font-medium">{room.name}</h3>
 
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-1 md:flex-row md:items-center md:gap-2">
                   <Badge className="text-xs" variant="secondary">
                     {dayjs(room.createdAt).toNow()}
                   </Badge>
@@ -47,14 +47,14 @@ export function RoomList() {
                 </div>
               </div>
 
-              <span className="flex items-center gap-1 text-sm">
+              <span className="absolute top-5 right-6 flex items-center gap-1 text-sm md:items-center">
                 Entrar
                 <ArrowRight className="size-3" />
               </span>
             </Link>
-          )
+          );
         })}
       </CardContent>
     </Card>
-  )
+  );
 }
